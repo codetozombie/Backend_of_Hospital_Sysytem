@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const frontexeSchema = mongoose.Schema({
+const patientSchema = mongoose.Schema({
   patientid: {
     type: Number,
     required: true,
@@ -41,4 +41,29 @@ const frontexeSchema = mongoose.Schema({
 });
 
 
-module.exports = Patient;
+
+const frontexeSchema = mongoose.Schema({
+  frontexeName:{
+    type:String,
+    requred: true,
+  },
+  frontexeSpec :{
+    type: String,
+    required: true,
+  }
+})
+
+const nurseSchema = mongoose.Schema({
+  nurseName:{
+    type:String,
+    required: true,
+  },
+  nurseSpeciality:{
+    type:String,
+    required:true,
+  }
+})
+
+
+
+module.exports = Hosdata;
