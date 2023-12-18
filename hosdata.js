@@ -64,6 +64,16 @@ const nurseSchema = mongoose.Schema({
   }
 })
 
+const doctorSchema = mongoose.Schema({
+  doctorName:{
+    type:String,
+    required: true,
+  },
+  doctorSpeciality:{
+    type:String,
+    required:true,
+  }
+})
 
 
 module.exports = Hosdata;
