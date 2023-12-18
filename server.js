@@ -66,22 +66,8 @@ const Frontexe = mongoose.model('Frontexe', {
     type: String,
     required: true,
   }
-});
 
-const Doctor = mongoose.model('Frontexe', {
-  nurseName:{
-    type:String,
-    required: true,
-  },
-  nurseSpeciality:{
-    type:String,
-    required:true,
-  }
-
-});
-
-
-const Nurse = mongoose.model('Frontexe', {
+const Doctor = mongoose.model('Doctor', {
   doctorName:{
     type:String,
     required: true,
@@ -92,12 +78,11 @@ const Nurse = mongoose.model('Frontexe', {
   }
 });
 
+});
 
-
-
-
-
-
+const Nurse = mongoose.model('Nurse', {
+  // Your Nurse schema here
+});
 
 app.get('/patients', async (req, res) => {
   try {
@@ -108,7 +93,7 @@ app.get('/patients', async (req, res) => {
   }
 });
 
-app.post('/frontexe/patients/:patientId', async (req, res) => {
+app.post('/frontexe/patients', async (req, res) => {
   try {
     const { name, age, condition } = req.body;
     const patient = new Patient({ name, age, condition });
@@ -127,6 +112,7 @@ app.get('/frontexe', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 app.post('/frontexe/appointments', async (req, res) => {
   try {
     const { patientid, secretaryId, appointmentType, date } = req.body;
@@ -136,7 +122,8 @@ app.post('/frontexe/appointments', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-app.post('/nurse/patients/:patientId', async (req, res) => {
+
+app.post('/nurse/patients', async (req, res) => {
   try {
     const { name, age, condition, bloodGroup, pressure, temperature } = req.body;
     const patient = new Patient({ name, age, condition, bloodGroup, pressure, temperature });
@@ -147,17 +134,16 @@ app.post('/nurse/patients/:patientId', async (req, res) => {
   }
 });
 
-app.post('/nurse/patients/:patientId', async (req, res) => {
+app.post('/doctor/patients', async (req, res) => {
   try {
-    const { name, age, condition } = req.body;
-    const patient = new Patient({ name, age, condition });
+    const { name, age, condition, doctorName, doctorSpeciality } = req.body;
+    const patient = new Patient({ name, age, condition, doctorName, doctorSpeciality });
     await patient.save();
     res.json(patient);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 app.get('/doctors/patients/:patientId', async (req, res) => {
   try {
@@ -173,9 +159,6 @@ app.get('/doctors/patients/:patientId', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
-
 
 mongoose
   .connect('mongodb+srv://infomealbert:thebase@codetozombie.1b8zuti.mongodb.net/?retryWrites=true&w=majority')
