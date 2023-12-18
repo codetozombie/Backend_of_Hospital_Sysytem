@@ -76,12 +76,18 @@ const Doctor = mongoose.model('Doctor', {
     type:String,
     required:true,
   }
-});
+})
 
-});
 
 const Nurse = mongoose.model('Nurse', {
-  // Your Nurse schema here
+  nurseName:{
+    type:String,
+    required: true,
+  },
+  nurseSpeciality:{
+    type:String,
+    required:true,
+  }
 });
 
 app.get('/patients', async (req, res) => {
